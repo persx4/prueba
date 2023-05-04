@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Luces</title>
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+			background-color: #f5f5f5;
+		}
+
+		.container {
+			display: flex;
+			align-items: center;
+			margin-bottom: 20px;
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 600px;
+		}
+
+		
+
+		.light {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			background-color: #ccc;
+			margin-bottom: 10px;
+		}
+
+		.light-on {
+			background-color: yellow;
+		}
+
+		.reset {
+			background-color: blue;
+			color: white;
+			padding: 10px;
+			border-radius: 5px;
+			border: none;
+			cursor: pointer;
+			margin-top: 20px;
+		}
+
+		#light1-container {
+			margin-right: auto;
+			order: -1;
+		}
+
+		#button1-container {
+			margin-right: auto;
+			order: -1;
+		}
+
+		#light2-container {
+			margin-left: auto;
+			order: 1;
+		}
+
+		#button2-container {
+			margin-left: auto;
+			order: 1;
+		}
+	</style>
+</head>
+<body>
+    <div class="container">
+        <div class="light" id="light1" style="margin: 10px"></div>
+        <div class="button" id="button1-container" >
+            <button onclick="turnOn(1)" 
+            style="
+            background-color: red; 
+            border: 0px; 
+            width: 50px;
+            height: 50px;
+            border-radius: 100px;
+            color: #ccc;
+            font-size: 20px;">A</button>
+		</div>
+		<div class="button" id="button2-container" style="margin: 10px; ">
+			<button onclick="turnOn(2)" 
+            style="
+            background-color: red; 
+            border: 0px; 
+            width: 50px;
+			height: 50px;
+            border-radius: 100px;
+            color: #ccc;
+            font-size: 20px;">L</button>
+		</div>
+        <div class="light" id="light2" style="margin: 10px;"></div>
+	</div>
+	<button class="reset" onclick="reset()">Resetear</button>
+
+	<script>
+		let lights = [false, false];
+
+		function turnOn(index) {
+			if (lights.indexOf(true) === -1) {
+				lights[index-1] = true;
+				document.getElementById(`light${index}`).classList.add('light-on');
+			}
+		}
+
+		function reset() {
+			lights = [false, false];
+			document.getElementById('light1').classList.remove('light-on');
+			document.getElementById('light2').classList.remove('light-on');
+		}
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'a' || event.key === 'A') {
+				turnOn(1);
+			}
+			if (event.key === 'l' || event.key === 'L') {
+				turnOn(2);
+			}
+			if (event.key === 'r' || event.key === 'R') {
+				reset();
+			}
+		});
+	</script>
+</body>
+</html>
